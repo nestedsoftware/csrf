@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IFrame Form Loader</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) { 
+        const iframe = document.getElementById("iframe");
+        iframe.addEventListener("load", function() {
+          try {
+            const formField = iframe.contentWindow.document.getElementById("name");  
+            if (formField) {
+              formField.value = "filled by JS code";
+            }
+          } catch (e) {
+            console.error(e);
+          }
+          try {
+            const csrfToken = iframe.contentWindow.document.getElementById("csrfToken");
+            if (csrfToken) {
+              console.log("csrfToken", csrfToken.value);
+            }
+          } catch (e) {
+            console.error(e)
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <iframe id="iframe" src="http://localhost:3000/form_no_embedding" title="iframe tries to load form - hardcoded to port 3000">
+  </body>
+</html>

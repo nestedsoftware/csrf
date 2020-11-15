@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery: running always works x-origin, but not accessing source</title>
+    <script id="jq" type="text/javascript" src="http://localhost:3000/js/jquery-3.5.1.js"></script>
+  </head>
+  <body>
+    <div id="execute_jquery"></div>
+    <div id="jquery_source_code"></div>
+    <script>
+      $("#execute_jquery").html("<b>I work with same origin and cross origin!</b>");
+    </script>
+    <script>
+      const script = document.getElementById("jq");
+      const url = script.src;
+      fetch(url)
+      .then(r => r.text())
+      .then(d => document.getElementById("jquery_source_code").innerHTML = d)
+      .catch(error => console.log(error));
+    </script>
+
+  </body>
+</html>
+

