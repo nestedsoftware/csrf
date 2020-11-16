@@ -8,9 +8,9 @@ In addition the what is shown in the examples below, when possible, it is a good
 
 Start containers:
   * Run the "same-origin" docker container: `$ ./run.sh`
-    * To view logs: docker logs --follow console-logging-server
+    * To view logs: `$ docker logs --follow console-logging-server`
   * Run the "cross-origin" docker container: `$ ./run.sh console-logging-server-xorigin 8000`
-    * To view logs: docker logs --follow console-logging-server-xorigin
+    * To view logs: `$ docker logs --follow console-logging-server-xorigin`
 
 To demonstrate that same-origin access works, enter the following into the browser's address field (check browser console to make sure there are no errors):
   * `http://localhost:3000/load_and_submit_form_with_fetch.html`
