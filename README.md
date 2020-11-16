@@ -8,7 +8,7 @@ In addition the what is shown in the examples below, when possible, it is a good
 
 Start containers:
   * Run the "same-origin" docker container: `$ ./run.sh`
-    * To view logs: docker logs --follow console-loggin-server
+    * To view logs: docker logs --follow console-logging-server
   * Run the "cross-origin" docker container: `$ ./run.sh console-logging-server-xorigin 8000`
     * To view logs: docker logs --follow console-logging-server-xorigin
 
