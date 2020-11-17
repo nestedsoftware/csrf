@@ -25,7 +25,7 @@ The Chrome browser will not submit cookies via a cross-origin request by default
 * Next, to show that an unprotected cross-origin submission works, go to `http://127.0.0.1:8000/submit_form_xorigin_no_csrf_protection.html` (note: cookies don't distinguish different ports on the same domain, so this trick prevents clobbering the original cookie produced by the legitimate interaction with localhost)
 * Now, to show that a csrf token will prevent the above attack, go to `http://127.0.0.1:8000/submit_form_xorigin_with_csrf_protection.html`
 
-Below is a screenshot showing the results from the 3 scenarios above:
+Below is a screenshot showing the results from the 3 scenarios above (note that the 2 cross-origin requests that are forced when the user accesses the malicious web site on port 8000 cause the user's session cookie to be automatically submitted):
 
 ![CSRF Attack Scenarios in Firefox](firefox_allows_csrf_attack.png?raw=true "CSRF Attack Scenarios in Firefox")
 
