@@ -4,7 +4,7 @@ The examples below show how the browser's [same-origin policy](https://developer
 
 These examples also show how an unguessable [csrf token](https://owasp.org/www-community/attacks/csrf "csrf") bound to the user's session can prevent cross-origin form submissions from succeeding (make sure to refresh the csrf token whenever the user logs back into the application). In such cases, the form is actually submitted, along with the relevant authorization cookies, but there should be no way for a third-party to access the secret csrf token or to programmatically tamper with the user's form fields (also see [clickjacking](https://en.wikipedia.org/wiki/Clickjacking#:~:text=Clickjacking%20(classified%20as%20a%20User,control%20of%20their%20computer%20while "clickjacking")).
 
-In addition the what is shown in the examples below, when possible, it is a good idea to make cookies [secure and httponly](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Creating_cookies "secure and httponly cookies"). Also (unrelated to this demo), remember to [sanitize web inputs](https://kevinsmith.io/sanitize-your-inputs "sanitize your inputs").
+In addition the what is shown in the examples below, when possible, it is a good idea to make cookies [secure and httponly](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Creating_cookies "secure and httponly cookies") as well as [SameSite=strict](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite).. Also (unrelated to this demo), remember to [sanitize web inputs](https://kevinsmith.io/sanitize-your-inputs "sanitize your inputs").
 
 Start containers:
   * Run the "same-origin" docker container: `$ ./run.sh`
@@ -12,12 +12,26 @@ Start containers:
   * Run the "cross-origin" docker container: `$ ./run.sh console-logging-server-xorigin 8000`
     * To view logs: `$ docker logs --follow console-logging-server-xorigin`
 
+As of this writing (November 15, 2020), a basic csrf attack without csrf token protection will no longer work by default in the Chrome browser (https://www.chromium.org/updates/same-site). The screenshot below shows what happens when we try:
+
+![CSRF Attack Fails in Chrome](chrome_does_not_allow_csrf_attack.png?raw=true "CSRF Attack Fails in Chrome")
+
+
+The browser will not submit cookies via a cross-origin request by default. To support cross-origin cookie submission, the cookies must be marked with SameSite=None and Secure attributes. This basic demostration does currently work in Firefox, although they are also apparently looking at implementing this restriction in the future also. 
+
+* To show that a normal form submission works: submit the form at http://localhost:3000/form
+* To show that an unprotected cross-origin submission works, go to http://127.0.0.1:8000/submit_form_xorigin_no_csrf_protection.html (note: cookies don't distinguish different ports on the same domain, so this trick prevents clobbering the original cookie produced by the legitimate interaction with localhost)
+* To show that a csrf token will prevent the above attack, go to http://127.0.0.1:8000/submit_form_xorigin_with_csrf_protection.html
+
+Below is a screenshot showing the results from the 3 scenarios above:
+
+![CSRF Attack Scenarios in Firefox](firefox_allows_csrf_attack.png?raw=true "CSRF Attack Scenarios in Firefox")
+
 To demonstrate that same-origin access works, enter the following into the browser's address field (check browser console to make sure there are no errors):
   * `http://localhost:3000/load_and_submit_form_with_fetch.html`
   * `http://localhost:3000/load_form_into_iframe.html`
   * `http://localhost:3000/load_form_into_iframe_no_embedding.html`
   * `http://localhost:3000/jquery_run_and_try_to_load_source.html`  
-
  
 To demonstrate that cross-origin access will not work, enter the following into the browser's address field (check browser console for cross-origin error messages):
   * `http://localhost:8000/load_and_submit_form_with_fetch.html`

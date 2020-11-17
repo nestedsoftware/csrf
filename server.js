@@ -29,6 +29,14 @@ app.get('/form_no_embedding', (req, res) => {
   res.render('simple_form', {csrfToken: req.session.csrfToken});
 });
 
+app.post('/save_no_csrf_protection', (req, res) => {
+    console.log({ url: req.url, method: req.method, headers: req.headers });
+    console.log('session id: ', req.session.sessionId);
+    console.log('name form field: ', req.body.name);
+    
+    res.status(200).send('Form processed successfully');
+});
+
 app.post('/save', (req, res) => {
   console.log({ url: req.url, method: req.method, headers: req.headers });
   console.log('session id: ', req.session.sessionId);
