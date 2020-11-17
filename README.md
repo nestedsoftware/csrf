@@ -14,7 +14,7 @@ Start containers:
 
 ## A Basic CSRF Attack
 
-As of this writing (November 15, 2020), a basic csrf attack without csrf token protection will no longer work by default in the Chrome browser (https://www.chromium.org/updates/same-site). The screenshot below shows what happens when we try:
+As of this writing (November 15, 2020), a basic csrf attack, even without csrf token protection, will no longer work by default in the Chrome browser (https://www.chromium.org/updates/same-site). The screenshot below shows what happens when we try:
 
 ![CSRF Attack Fails in Chrome](chrome_does_not_allow_csrf_attack.png?raw=true "CSRF Attack Fails in Chrome")
 
