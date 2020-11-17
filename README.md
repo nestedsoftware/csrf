@@ -27,6 +27,8 @@ Below is a screenshot showing the results from the 3 scenarios above:
 
 ![CSRF Attack Scenarios in Firefox](firefox_allows_csrf_attack.png?raw=true "CSRF Attack Scenarios in Firefox")
 
+Next, we can show some of the protections in place to prevent access to cross-origin resources. After all, if we are to rely on a csrf token to prevent csrf attacks, we need to make sure the attacker can't just get the token and proceed with the attack after all.
+
 To demonstrate that same-origin access works, enter the following into the browser's address field (check browser console to make sure there are no errors):
   * `http://localhost:3000/load_and_submit_form_with_fetch.html`
   * `http://localhost:3000/load_form_into_iframe.html`
