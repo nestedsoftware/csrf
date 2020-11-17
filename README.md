@@ -17,7 +17,7 @@ As of this writing (November 15, 2020), a basic csrf attack without csrf token p
 ![CSRF Attack Fails in Chrome](chrome_does_not_allow_csrf_attack.png?raw=true "CSRF Attack Fails in Chrome")
 
 
-The browser will not submit cookies via a cross-origin request by default. To support cross-origin cookie submission, the cookies must be marked with SameSite=None and Secure attributes. This basic demostration does currently work in Firefox, although they are also apparently looking at implementing this restriction in the future also. 
+The Chrome browser will not submit cookies via a cross-origin request by default. To support cross-origin cookie submission, the cookies must be marked with SameSite=None and Secure attributes. This basic demostration does currently work in Firefox, although they are also apparently looking at implementing this restriction in the future also. 
 
 * To show that a normal form submission works: submit the form at http://localhost:3000/form
 * Next, to show that an unprotected cross-origin submission works, go to http://127.0.0.1:8000/submit_form_xorigin_no_csrf_protection.html (note: cookies don't distinguish different ports on the same domain, so this trick prevents clobbering the original cookie produced by the legitimate interaction with localhost)
