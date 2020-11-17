@@ -1,4 +1,4 @@
-# How cross-origin requests and csrf-tokens work
+# How Cross-Origin Requests and CSRF Tokens Work
 
 The examples below show how the browser's [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy "same-origin policy") can prevent undesired cross-origin access to resources. It's important to understand that the browser enforces this policy on browser "reads", that is, on the responses sent back from the server to the browser (although the new SameSite behaviour recently implemented in Chrome, described further down, appears to be a welcome exception that greatly improves security).. 
 
@@ -11,6 +11,8 @@ Start containers:
     * To view logs: `$ docker logs --follow console-logging-server`
   * Run the "cross-origin" docker container: `$ ./run.sh console-logging-server-xorigin 8000`
     * To view logs: `$ docker logs --follow console-logging-server-xorigin`
+
+## A Basic CSRF Attack
 
 As of this writing (November 15, 2020), a basic csrf attack without csrf token protection will no longer work by default in the Chrome browser (https://www.chromium.org/updates/same-site). The screenshot below shows what happens when we try:
 
@@ -26,6 +28,8 @@ The Chrome browser will not submit cookies via a cross-origin request by default
 Below is a screenshot showing the results from the 3 scenarios above:
 
 ![CSRF Attack Scenarios in Firefox](firefox_allows_csrf_attack.png?raw=true "CSRF Attack Scenarios in Firefox")
+
+## Cross-Origin Access Protections
 
 Next, we can show some of the protections in place to prevent access to cross-origin resources. After all, if we are to rely on a csrf token to prevent csrf attacks, we need to make sure the attacker can't just get the token and proceed with the attack after all.
 
