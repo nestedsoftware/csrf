@@ -1,4 +1,4 @@
-# Demonstration of how cross-origin requests and csrf-tokens work
+# How cross-origin requests and csrf-tokens work
 
 The examples below show how the browser's [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy "same-origin policy") can prevent undesired cross-origin access to resources. It's important to understand that the browser enforces this policy on browser "reads", that is, on the responses sent back from the server to the browser (although the new SameSite behaviour recently implemented in Chrome, described further down, appears to be a welcome exception that greatly improves security).. 
 
