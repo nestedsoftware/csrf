@@ -21,7 +21,7 @@ As of this writing (November 15, 2020), a basic csrf attack, even without csrf t
 
 The Chrome browser will not submit cookies via a cross-origin request by default. To support cross-origin cookie submission, the cookies must be marked with `SameSite=None` and `Secure` attributes. This basic demonstration does currently work in Firefox (version used for this example is 82.0.3), although Firefox is also apparently looking into implementing this restriction in the future. 
 
-* To show that a normal form submission works: submit the form at `http://localhost:3000/form`
+* To show that a normal form submission works (and to create the session cookie the malicious site will attempt to hijack): submit the form at `http://localhost:3000/form`
 * Next, to show that an unprotected cross-origin submission works, go to `http://127.0.0.1:8000/submit_form_xorigin_no_csrf_protection.html` (note: cookies don't distinguish different ports on the same domain, so this trick prevents clobbering the original cookie produced by the legitimate interaction with localhost)
 * Now, to show that a csrf token will prevent the above attack, go to `http://127.0.0.1:8000/submit_form_xorigin_with_csrf_protection.html`
 
